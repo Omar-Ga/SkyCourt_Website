@@ -1,0 +1,60 @@
+.scroller {
+  overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+  mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+
+.scroller__inner {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: scroll linear infinite;
+}
+
+.scroller[data-direction="right"] .scroller__inner {
+  animation-direction: reverse;
+}
+
+.scroller[data-speed="fast"] .scroller__inner {
+  animation-duration: 20s;
+}
+
+.scroller[data-speed="normal"] .scroller__inner {
+  animation-duration: 40s;
+}
+
+.scroller[data-speed="slow"] .scroller__inner {
+  animation-duration: 80s;
+}
+
+@keyframes scroll {
+  to {
+    transform: translate(calc(-50%));
+  }
+}
+
+.brand-card {
+  width: 400px; /* Adjust as needed */
+  height: 400px; /* Adjust as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  margin: 0 10px; /* Spacing between cards */
+  background: hsl(var(--card));
+  border-radius: 0.5rem;
+  box-shadow: var(--westfield-shadow);
+}
+
+.brand-image {
+  width: 100%;
+  height: 90%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.brand-name {
+  margin-top: 1rem;
+  font-weight: 500;
+}
