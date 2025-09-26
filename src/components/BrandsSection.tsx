@@ -1,29 +1,7 @@
 import InfiniteScroller from "./InfiniteScroller";
+import { brands } from "@/data/brands";
 
 const BrandsSection = () => {
-  const brands = [
-    { name: "Ammar Auto", image: "/brands/ammar auto edited.png" },
-    { name: "B-Tech", image: "/brands/b tech edited.png" },
-    { name: "Balbaa Village", image: "/brands/balbaa village edited.png" },
-    { name: "Blaban", image: "/brands/blaban edited.png" },
-    { name: "Bright Store", image: "/brands/bright store edited.png" },
-    { name: "Dream 2000", image: "/brands/dream 2000 edited.png" },
-    { name: "Fathalla Market", image: "/brands/fathalla edited.png" },
-    { name: "Ftirty", image: "/brands/feterty edited.png" },
-    { name: "Donia El Gambary", image: "/brands/gambary edited.png" },
-    { name: "Hamed El Basiony", image: "/brands/hamed luxury edited.png" },
-    { name: "Hans", image: "/brands/hans edited.png" },
-    { name: "Hardees", image: "/brands/hardees edited.png" },
-    { name: "KFC", image: "/brands/KFC edited.png" },
-    { name: "Khatab", image: "/brands/khatab edited.png" },
-    { name: "Pizza Hut", image: "/brands/pizza hut edited.png" },
-    { name: "Ragab Perfumes", image: "/brands/ragab edited.png" },
-    { name: "Raya", image: "/brands/raya edited.png" },
-    { name: "Smart Furniture", image: "/brands/smart edited.png" },
-    { name: "El Tahrir", image: "/brands/tahrir edited.png" },
-    { name: "Zizo & Lavish", image: "/brands/zizo edited.png" },
-  ];
-
   const firstRow = brands.slice(0, 10);
   const secondRow = brands.slice(10, 20);
 

@@ -30,12 +30,15 @@ const Hero = () => {
       <div className="absolute inset-0">
         <video
           ref={videoRef}
-          src="/herosection_vid.mp4"
+          poster="/hero_placeholder.webp"
           autoPlay
           loop
           muted
           className="w-full h-full object-cover"
-        />
+        >
+          <source src="/herosection_vid.webm" type="video/webm" />
+          <source src="/herosecaption_vid.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-black/20"></div>
       </div>
 
