@@ -1,20 +1,3 @@
-npx shadcn@latest add https://reactbits.dev/r/MagnetLines-TS-TW
-usage
-import MagnetLines from './MagnetLines';
-
-<MagnetLines
-  rows={9}
-  columns={9}
-  containerSize="60vmin"
-  lineColor="tomato"
-  lineWidth="0.8vmin"
-  lineHeight="5vmin"
-  baseAngle={0}
-  style={{ margin: "2rem auto" }}
-/>
-code
-
-
 import React, { useRef, useEffect, CSSProperties } from 'react';
 
 interface MagnetLinesProps {
@@ -114,64 +97,4 @@ const MagnetLines: React.FC<MagnetLinesProps> = ({
   );
 };
 
-export default MagnetLines; 
-
-
-
-
-
-
-Property	Type	Default	Description
-rows
-number
-
-9
-Number of grid rows.
-
-columns
-number
-
-9
-Number of grid columns.
-
-containerSize
-string
-
-80vmin
-Specifies the width and height of the entire grid container.
-
-lineColor
-string
-
-#efefef
-Color for each line (the <span> elements).
-
-lineWidth
-string
-
-1vmin
-Specifies each line’s thickness.
-
-lineHeight
-string
-
-6vmin
-Specifies each line’s length.
-
-baseAngle
-number
-
--10
-Initial rotation angle (in degrees) before pointer movement.
-
-className
-string
-
-—
-Additional class name(s) applied to the container.
-
-style
-object
-
-{}
-Inline styles for the container.
+export default MagnetLines;

@@ -3,7 +3,8 @@ import Hero from "@/components/Hero";
 import ServicesSection from "@/components/ServicesSection";
 import StatsSection from "@/components/StatsSection";
 import BrandsSection from "@/components/BrandsSection";
-import Footer from "@/components/Footer";
+import { CtaSection } from "@/components/CtaSection";
+import { Footer } from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -13,6 +14,7 @@ const Index = () => {
       <ServicesSection />
       <StatsSection />
       <BrandsSection />
+      <CtaSection />
       <Footer />
     </div>
   );
