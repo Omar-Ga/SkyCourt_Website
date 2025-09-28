@@ -1,5 +1,19 @@
 import { useRef, useEffect, useState } from 'react';
-import { Renderer, Program, Triangle, Mesh } from 'ogl';
+import { cn } from '@/lib/utils';
+
+// Lazy load OGL to avoid build issues
+let OGL: any = null;
+const loadOGL = async () => {
+  if (!OGL) {
+    try {
+      OGL = await import('ogl');
+    } catch (error) {
+      console.warn('Failed to load OGL:', error);
+      return null;
+    }
+  }
+  return OGL;
+};
 
 export type RaysOrigin =
   | 'top-center'
@@ -117,6 +131,19 @@ const LightRays: React.FC<LightRaysProps> = ({
 
     const initializeWebGL = async () => {
       if (!containerRef.current) return;
+
+      const ogl = await loadOGL();
+      if (!ogl) {
+        // Fallback to CSS-based light rays if WebGL fails
+        if (containerRef.current) {
+          containerRef.current.innerHTML = `
+            <div class="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-transparent opacity-30"></div>
+          `;
+        }
+        return;
+      }
+
+      const { Renderer, Program, Triangle, Mesh } = ogl;
 
       await new Promise(resolve => setTimeout(resolve, 10));
 
