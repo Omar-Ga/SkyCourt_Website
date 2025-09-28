@@ -1,4 +1,4 @@
-import { ShoppingBag, MapPin, Clock, Shield, Wifi, Car } from "lucide-react";
+import { ShoppingBag, MapPin, Clock, Shield, Car, Sparkles } from "lucide-react";
 
 const FeaturesSection = () => {
   const features = [
@@ -10,12 +10,12 @@ const FeaturesSection = () => {
     {
       icon: MapPin,
       title: "Prime Location",
-      description: "Conveniently located in the heart of the city with easy access"
+      description: "Strategically located in one of the city's most luxurious and accessible districts"
     },
     {
       icon: Clock,
-      title: "Extended Hours",
-      description: "Open daily from 10 AM to 11 PM, with 24/7 supermarket access"
+      title: "Always Open",
+      description: "Experience SkyCourt 24/7, ensuring convenience at any time"
     },
     {
       icon: Shield,
@@ -23,14 +23,14 @@ const FeaturesSection = () => {
       description: "24/7 security and family-friendly atmosphere for peace of mind"
     },
     {
-      icon: Wifi,
-      title: "Free WiFi",
-      description: "Stay connected with complimentary high-speed internet throughout"
+      icon: Sparkles,
+      title: "Modern Amenities",
+      description: "Enjoy a comfortable and convenient experience with our modern facilities"
     },
     {
       icon: Car,
-      title: "Free Parking",
-      description: "Ample parking spaces available at no cost for all visitors"
+      title: "Convenient Parking",
+      description: "Dedicated and easily accessible parking spaces for all our visitors"
     }
   ];
 

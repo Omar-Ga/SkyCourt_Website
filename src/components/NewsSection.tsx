@@ -1,4 +1,5 @@
 import { Calendar, ArrowRight } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 const NewsSection = () => {
   const news = [
@@ -33,7 +34,7 @@ const NewsSection = () => {
 
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Latest News & Updates
@@ -43,33 +44,37 @@ const NewsSection = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {news.map((item, index) => (
-            <article key={index} className="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-shadow">
-              <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={item.image} 
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <div className="flex items-center text-sm text-muted-foreground mb-2">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  {formatDate(item.date)}
-                </div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-red-700 transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-muted-foreground mb-4">{item.excerpt}</p>
-                <button className="flex items-center text-red-700 font-medium hover:text-red-800 transition-colors">
-                  Read More
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </button>
-              </div>
-            </article>
-          ))}
-        </div>
+        <Carousel opts={{ align: "start", loop: true }}>
+          <CarouselContent>
+            {news.map((item, index) => (
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 mx-4">
+                <article className="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-shadow">
+                  <div className="relative h-48 overflow-hidden">
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-center text-sm text-muted-foreground mb-2">
+                      <Calendar className="w-4 h-4 mr-2" />
+                      {formatDate(item.date)}
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2 group-hover:text-red-700 transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-muted-foreground mb-4">{item.excerpt}</p>
+                    <button className="flex items-center text-red-700 font-medium hover:text-red-800 transition-colors">
+                      Read More
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </button>
+                  </div>
+                </article>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
       </div>
     </section>
   );

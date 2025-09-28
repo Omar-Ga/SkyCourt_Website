@@ -7,7 +7,7 @@ const BrandsSection = () => {
 
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           Iconic brands at SkyCourt
         </h2>
