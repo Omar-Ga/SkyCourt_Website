@@ -1,36 +1,26 @@
 import { Star } from "lucide-react";
+import { useInView } from 'react-intersection-observer';
+import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 const TestimonialsSection = () => {
-  const testimonials = [
-    {
-      name: "Sarah Ahmed",
-      rating: 5,
-      comment: "SkyCourt has everything I need in one place. The kids area is fantastic and the variety of stores is impressive!",
-      location: "Cairo"
-    },
-    {
-      name: "Mohamed Hassan",
-      rating: 5,
-      comment: "Great shopping experience with excellent food options. The 24-hour supermarket is incredibly convenient.",
-      location: "Giza"
-    },
-    {
-      name: "Fatima Ali",
-      rating: 5,
-      comment: "Clean, safe, and well-organized. Perfect for family shopping trips. The parking is always available too!",
-      location: "Alexandria"
-    }
-  ];
+  const { t } = useTranslation();
+  const { ref, inView } = useInView({ triggerOnce: false });
+
+  const testimonials = t('testimonials', { returnObjects: true }) as { name: string, rating: number, comment: string, location: string }[];
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
+    <section 
+      ref={ref}
+      className={cn("py-16 px-4 sm:px-6 lg:px-8 bg-muted/30 section-animate", { 'in-view': inView })}
+    >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            What Our Visitors Say
+            {t('what_our_visitors_say')}
           </h2>
           <p className="text-lg text-muted-foreground">
-            Don't just take our word for it - hear from our satisfied customers
+            {t('hear_from_our_customers')}
           </p>
         </div>
         

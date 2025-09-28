@@ -1,5 +1,6 @@
 import React from 'react';
 import './InfiniteScroller.css';
+import { useTranslation } from 'react-i18next';
 
 interface Brand {
   name: string;
@@ -13,8 +14,10 @@ interface InfiniteScrollerProps {
 }
 
 const InfiniteScroller: React.FC<InfiniteScrollerProps> = ({ items, direction, speed }) => {
+  const { i18n } = useTranslation();
+
   return (
-    <div className="scroller" data-direction={direction} data-speed={speed}>
+    <div className="scroller" data-direction={direction} data-speed={speed} data-lang={i18n.language}>
       <div className="scroller__inner">
         {[...items, ...items].map((item, index) => (
           <div className="brand-card" key={index}>

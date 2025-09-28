@@ -1,42 +1,27 @@
-import { useEffect, useRef, useState } from "react";
+import { useInView } from 'react-intersection-observer';
+import { cn } from '@/lib/utils';
 import RotatingText from "./ui/RotatingText";
+import { useTranslation } from 'react-i18next';
 
 const StatsSection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const { t } = useTranslation();
+  const { ref, inView } = useInView({ triggerOnce: false });
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const rotatingTexts = t('rotating_texts', { returnObjects: true }) as string[];
 
   return (
     <section 
-      ref={sectionRef}
-      className="relative py-5 px-4 sm:px-6 lg:px-8 bg-background overflow-hidden"
+      ref={ref}
+      className={cn("relative py-5 px-4 sm:px-6 lg:px-8 bg-background overflow-hidden section-animate", { 'in-view': inView })}
     >
       <div className="max-w-7xl mx-auto relative">
         {/* Central Statistics Text */}
         <div className="relative z-10 text-center py-10">
-          <div className={`transition-all duration-1000 ${
-            isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-          }`}>
+          <div>
             <p className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mx-auto">
-              Join thousands of visitors and shop around{" "}
+              {t('join_thousands')}{" "}
               <RotatingText 
-                texts={['50+ brands', '50+ centers', '1 unforgettable experience']}
+                texts={rotatingTexts}
                 mainClassName="text-red-700 inline-flex"
                 splitBy="words"
                 rotationInterval={3000}

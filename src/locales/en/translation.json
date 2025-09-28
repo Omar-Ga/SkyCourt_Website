@@ -1,0 +1,144 @@
+{
+  "home": "Home",
+  "why_choose_skycourt": "Why Choose SkyCourt?",
+  "experience_shopping": "Experience shopping like never before with our world-class amenities and services",
+  "features": [
+    { 
+      "title": "Premium Shopping", 
+      "description": "Discover over 50 premium brands and local favorites all under one roof"
+    },
+    {
+      "title": "Prime Location",
+      "description": "Strategically located in one of the city's most luxurious and accessible districts"
+    },
+    {
+      "title": "Always Open",
+      "description": "Experience SkyCourt 24/7, ensuring convenience at any time"
+    },
+    {
+      "title": "Safe Environment",
+      "description": "24/7 security and family-friendly atmosphere for peace of mind"
+    },
+    {
+      "title": "Modern Amenities",
+      "description": "Enjoy a comfortable and convenient experience with our modern facilities"
+    },
+    {
+      "title": "Convenient Parking",
+      "description": "Dedicated and easily accessible parking spaces for all our visitors"
+    }
+  ],
+  "our_services": "Our Services",
+  "services": [
+    {
+      "title": "Safe & Fun Kids Area",
+      "description": "Enjoy peace of mind with our fully enclosed and supervised play space for your children."
+    },
+    {
+      "title": "24-Hour Supermarket",
+      "description": "All your needs, anytime. Our supermarket is open 24/7 for your convenience."
+    },
+    {
+      "title": "Cafes & Eateries",
+      "description": "From a quick coffee to a relaxing lunch, choose from our diverse selection of cafes."
+    }
+  ],
+  "mall_highlights": "Mall Highlights",
+  "discover_the_best": "Discover the best of SkyCourt",
+  "promotions": [
+    {
+      "title": "Diverse Retailers",
+      "description": "Explore a wide array of international and local brands.",
+      "validity": "Always something new to discover"
+    },
+    {
+      "title": "Culinary Delights",
+      "description": "Savor exquisite flavors from around the world.",
+      "validity": "Open daily for your enjoyment"
+    },
+    {
+      "title": "Scenic Views & Ambiance",
+      "description": "Enjoy breathtaking views and a relaxing atmosphere throughout the mall.",
+      "validity": "Perfect for a leisurely day out"
+    }
+  ],
+  "join_thousands": "Join thousands of visitors and shop around",
+  "rotating_texts": [
+    "50+ brands",
+    "50+ centers",
+    "1 unforgettable experience"
+  ],
+  "iconic_brands": "Iconic brands at SkyCourt",
+  "brands": [
+    { "name": "Ammar Auto" },
+    { "name": "B-Tech" },
+    { "name": "Balbaa Village" },
+    { "name": "Blaban" },
+    { "name": "Bright Store" },
+    { "name": "Dream 2000" },
+    { "name": "Fathalla Market" },
+    { "name": "Ftirty" },
+    { "name": "Donia El Gambary" },
+    { "name": "Hamed El Basiony" },
+    { "name": "Hans" },
+    { "name": "Hardees" },
+    { "name": "KFC" },
+    { "name": "Khatab" },
+    { "name": "Pizza Hut" },
+    { "name": "Ragab Perfumes" },
+    { "name": "Raya" },
+    { "name": "Smart Furniture" },
+    { "name": "El Tahrir" },
+    { "name": "Zizo & Lavish" }
+  ],
+  "latest_news": "Latest News & Updates",
+  "stay_informed": "Stay informed about the latest happenings at SkyCourt",
+  "news": [
+    {
+      "date": "2025-01-15",
+      "title": "New Fashion Brands Coming to SkyCourt",
+      "excerpt": "We're excited to announce the arrival of three new international fashion brands this spring."
+    },
+    {
+      "date": "2025-01-10",
+      "title": "Extended Weekend Hours",
+      "excerpt": "Starting this month, we're extending our weekend hours to better serve our customers."
+    },
+    {
+      "date": "2025-01-05",
+      "title": "Kids Zone Expansion Complete",
+      "excerpt": "Our newly expanded kids area now features more activities and enhanced safety measures."
+    }
+  ],
+  "visit_us_today": "Visit Us Today",
+  "find_us_in_the_heart": "Find us in the heart of the city - easily accessible by car or public transport",
+  "address": "Address",
+  "address_details": "sidi abdelrehman - al sahel al shamaly<br />alexandria road - the 137 kilo road<br />",
+  "opening_hours": "Opening Hours",
+  "opening_hours_details": "Open 24/7 Saturday through Friday",
+  "email": "Email",
+  "email_details": "info@skycourt.com",
+  "interactive_map_coming_soon": "Interactive Map Coming Soon",
+  "what_our_visitors_say": "What Our Visitors Say",
+  "hear_from_our_customers": "Don't just take our word for it - hear from our satisfied customers",
+  "testimonials": [
+    {
+      "name": "Sarah Ahmed",
+      "rating": 5,
+      "comment": "SkyCourt has everything I need in one place. The kids area is fantastic and the variety of stores is impressive!",
+      "location": "Cairo"
+    },
+    {
+      "name": "Mohamed Hassan",
+      "rating": 5,
+      "comment": "Great shopping experience with excellent food options. The 24-hour supermarket is incredibly convenient.",
+      "location": "Giza"
+    },
+    {
+      "name": "Fatima Ali",
+      "rating": 5,
+      "comment": "Clean, safe, and well-organized. Perfect for family shopping trips. The parking is always available too!",
+      "location": "Alexandria"
+    }
+  ]
+}

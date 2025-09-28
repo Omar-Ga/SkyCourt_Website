@@ -33,6 +33,16 @@
   }
 }
 
+@keyframes scroll-rtl {
+  to {
+    transform: translate(calc(50%));
+  }
+}
+
+.scroller[data-lang="ar"] .scroller__inner {
+  animation-name: scroll-rtl;
+}
+
 .brand-card {
   width: 400px; /* Adjust as needed */
   height: 400px; /* Adjust as needed */

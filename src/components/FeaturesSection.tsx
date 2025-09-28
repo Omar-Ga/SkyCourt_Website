@@ -1,61 +1,43 @@
 import { ShoppingBag, MapPin, Clock, Shield, Car, Sparkles } from "lucide-react";
+import { useInView } from 'react-intersection-observer';
+import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 const FeaturesSection = () => {
-  const features = [
-    {
-      icon: ShoppingBag,
-      title: "Premium Shopping",
-      description: "Discover over 50 premium brands and local favorites all under one roof"
-    },
-    {
-      icon: MapPin,
-      title: "Prime Location",
-      description: "Strategically located in one of the city's most luxurious and accessible districts"
-    },
-    {
-      icon: Clock,
-      title: "Always Open",
-      description: "Experience SkyCourt 24/7, ensuring convenience at any time"
-    },
-    {
-      icon: Shield,
-      title: "Safe Environment",
-      description: "24/7 security and family-friendly atmosphere for peace of mind"
-    },
-    {
-      icon: Sparkles,
-      title: "Modern Amenities",
-      description: "Enjoy a comfortable and convenient experience with our modern facilities"
-    },
-    {
-      icon: Car,
-      title: "Convenient Parking",
-      description: "Dedicated and easily accessible parking spaces for all our visitors"
-    }
-  ];
+  const { t } = useTranslation();
+  const { ref, inView } = useInView({ triggerOnce: false });
+
+  const featureIcons = [ShoppingBag, MapPin, Clock, Shield, Sparkles, Car];
+  const features = t('features', { returnObjects: true }) as { title: string, description: string }[];
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background">
+    <section 
+      ref={ref}
+      className={cn("py-16 px-4 sm:px-6 lg:px-8 bg-background section-animate", { 'in-view': inView })}
+    >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Why Choose SkyCourt?
+            {t('why_choose_skycourt')}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Experience shopping like never before with our world-class amenities and services
+            {t('experience_shopping')}
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div key={index} className="text-center group">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4 group-hover:bg-red-200 transition-colors">
-                <feature.icon className="w-8 h-8 text-red-700" />
+          {features.map((feature, index) => {
+            const Icon = featureIcons[index];
+            return (
+              <div key={index} className="text-center group">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4 group-hover:bg-red-200 transition-colors">
+                  <Icon className="w-8 h-8 text-red-700" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-muted-foreground">{feature.description}</p>
               </div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-muted-foreground">{feature.description}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

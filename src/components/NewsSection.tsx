@@ -1,27 +1,22 @@
 import { Calendar, ArrowRight } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { useInView } from 'react-intersection-observer';
+import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 const NewsSection = () => {
-  const news = [
-    {
-      date: "2025-01-15",
-      title: "New Fashion Brands Coming to SkyCourt",
-      excerpt: "We're excited to announce the arrival of three new international fashion brands this spring.",
-      image: "https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=1"
-    },
-    {
-      date: "2025-01-10",
-      title: "Extended Weekend Hours",
-      excerpt: "Starting this month, we're extending our weekend hours to better serve our customers.",
-      image: "https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=1"
-    },
-    {
-      date: "2025-01-05",
-      title: "Kids Zone Expansion Complete",
-      excerpt: "Our newly expanded kids area now features more activities and enhanced safety measures.",
-      image: "https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=1"
-    }
+  const { t } = useTranslation();
+  const { ref, inView } = useInView({ triggerOnce: false });
+
+  const newsImages = [
+    "https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=1",
+    "https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=1",
+    "https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&dpr=1"
   ];
+  const news = (t('news', { returnObjects: true }) as { date: string, title: string, excerpt: string }[]).map((item, index) => ({
+    ...item,
+    image: newsImages[index],
+  }));
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -33,14 +28,17 @@ const NewsSection = () => {
   };
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
+    <section 
+      ref={ref}
+      className={cn("py-16 px-4 sm:px-6 lg:px-8 bg-muted/30 section-animate", { 'in-view': inView })}
+    >
       <div className="mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Latest News & Updates
+            {t('latest_news')}
           </h2>
           <p className="text-lg text-muted-foreground">
-            Stay informed about the latest happenings at SkyCourt
+            {t('stay_informed')}
           </p>
         </div>
         

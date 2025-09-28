@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Header = () => {
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -48,9 +51,10 @@ const Header = () => {
                     : 'text-red-700 hover:bg-red-700/10 hover:text-red-700'
                 )}
               >
-                Home
+                {t('home')}
               </Button>
             </Link>
+            <LanguageSwitcher />
           </div>
         </div>
       </div>
