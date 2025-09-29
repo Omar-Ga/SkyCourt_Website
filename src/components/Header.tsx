@@ -37,7 +37,7 @@ const Header = () => {
             <img                                                      
               src="/logo/skycourt_logo.svg" 
               alt="SkyCourt Logo" 
-              className="h-[120px] w-auto transition-colors duration-300"
+              className="h-[90px] w-auto transition-colors duration-300"
             />
           </div>
           <div className="flex items-center space-x-4">
