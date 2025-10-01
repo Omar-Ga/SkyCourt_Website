@@ -54,7 +54,7 @@ const Header = () => {
                 {t('home')}
               </Button>
             </Link>
-            <LanguageSwitcher />
+            <LanguageSwitcher isScrolled={isScrolled} />
           </div>
         </div>
       </div>

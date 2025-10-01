@@ -6,8 +6,11 @@ import {
   type VariantLabels,
   type Target,
   type TargetAndTransition
-} from 'motion/react';
-import { cn } from '@/lib/utils';
+} from 'framer-motion';
+
+function cn(...classes: (string | undefined | null | boolean)[]): string {
+  return classes.filter(Boolean).join(' ');
+}
 
 export interface RotatingTextRef {
   next: () => void;
