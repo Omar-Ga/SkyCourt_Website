@@ -22,12 +22,37 @@ export const InfiniteMovingCards = ({
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
  
-  useEffect(() => {
-    console.log("useEffect in InfiniteMovingCards running");
-    addAnimation();
-  }, []);
-  const [start, setStart] = useState(false);
-  function addAnimation() {
+  const addAnimation = React.useCallback(() => {
+    const getDirection = () => {
+      if (containerRef.current) {
+        if (direction === "left") {
+          containerRef.current.style.setProperty(
+            "--animation-direction",
+            "forwards",
+          );
+        } else {
+          containerRef.current.style.setProperty(
+            "--animation-direction",
+            "reverse",
+          );
+        }
+      }
+    };
+    const getSpeed = () => {
+      if (containerRef.current) {
+        console.log("getSpeed running, current speed prop:", speed);
+        if (speed === "fast") {
+          containerRef.current.style.setProperty("--animation-duration", "20s");
+          console.log("Setting animation-duration to 20s");
+        } else if (speed === "normal") {
+          containerRef.current.style.setProperty("--animation-duration", "40s");
+          console.log("Setting animation-duration to 40s");
+        } else {
+          containerRef.current.style.setProperty("--animation-duration", "320s");
+          console.log("Setting animation-duration to 320s (slow)");
+        }
+      }
+    };
     console.log("addAnimation running");
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
@@ -43,37 +68,7 @@ export const InfiniteMovingCards = ({
       getSpeed();
       setStart(true);
     }
-  }
-  const getDirection = () => {
-    if (containerRef.current) {
-      if (direction === "left") {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "forwards",
-        );
-      } else {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "reverse",
-        );
-      }
-    }
-  };
-  const getSpeed = () => {
-    if (containerRef.current) {
-      console.log("getSpeed running, current speed prop:", speed);
-      if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "20s");
-        console.log("Setting animation-duration to 20s");
-      } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "40s");
-        console.log("Setting animation-duration to 40s");
-      } else {
-        containerRef.current.style.setProperty("--animation-duration", "320s");
-        console.log("Setting animation-duration to 320s (slow)");
-      }
-    }
-  };
+  }, [direction, speed]);
   return (
     <div
       ref={containerRef}

@@ -43,28 +43,3 @@
   animation-name: scroll-rtl;
 }
 
-.brand-card {
-  width: 400px; /* Adjust as needed */
-  height: 400px; /* Adjust as needed */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  margin: 0 10px; /* Spacing between cards */
-  background: hsl(var(--card));
-  border-radius: 0.5rem;
-  box-shadow: var(--westfield-shadow);
-}
-
-.brand-image {
-  width: 100%;
-  height: 90%;
-  object-fit: cover;
-  border-radius: 0.5rem;
-}
-
-.brand-name {
-  margin-top: 1rem;
-  font-weight: 500;
-}

@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Languages } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-interface LanguageSwitcherProps {
+export interface LanguageSwitcherProps {
   isScrolled: boolean;
 }
 
@@ -23,13 +23,17 @@ const LanguageSwitcher = ({ isScrolled }: LanguageSwitcherProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <Languages
-            className={cn(
-              'h-[1.2rem] w-[1.2rem] transition-colors duration-300',
-              isScrolled ? 'text-white' : 'text-red-700'
-            )}
-          />
+        <Button
+          variant="ghost"
+          size="icon"
+          className={cn(
+            'transition-colors duration-300',
+            isScrolled
+              ? 'text-red-700 hover:bg-red-700/10 hover:text-red-700'
+              : 'text-white hover:bg-white/10 hover:text-white'
+          )}
+        >
+          <Languages className="h-[1.2rem] w-[1.2rem]" />
           <span className="sr-only">{t('toggle_language')}</span>
         </Button>
       </DropdownMenuTrigger>

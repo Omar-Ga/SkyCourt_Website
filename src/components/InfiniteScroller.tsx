@@ -20,9 +20,9 @@ const InfiniteScroller: React.FC<InfiniteScrollerProps> = ({ items, direction, s
     <div className="scroller" data-direction={direction} data-speed={speed} data-lang={i18n.language}>
       <div className="scroller__inner">
         {[...items, ...items].map((item, index) => (
-          <div className="brand-card" key={index}>
-            <img src={item.image} alt={item.name} className="brand-image" />
-            <span className="brand-name">{item.name}</span>
+          <div className="w-[400px] h-[400px] flex flex-col items-center justify-center p-4 m-2 bg-card rounded-lg shadow-lg" key={index}>
+            <img src={item.image} alt={item.name} className="w-full h-[90%] object-cover rounded-lg" />
+            <span className="mt-4 font-medium">{item.name}</span>
           </div>
         ))}
       </div>

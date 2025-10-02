@@ -1,11 +1,9 @@
 import { cn } from '@/lib/utils';
-import RotatingText from "@/components/RotatingText";
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
+import { RotatingText } from '@/components/ui/shadcn-io/rotating-text';
 
 const StatsSection = () => {
   const { t } = useTranslation();
-
   const rotatingTexts = t('rotating_texts', { returnObjects: true }) as string[];
 
   return (
@@ -16,21 +14,10 @@ const StatsSection = () => {
         {/* Central Statistics Text */}
         <div className="relative z-10 text-center py-10">
           <div>
-            <motion.p 
-              layout
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mx-auto flex items-center justify-center"
-            >
-              <motion.span layout>{t('join_thousands')}{" "}</motion.span>
-              <RotatingText 
-                texts={rotatingTexts}
-                mainClassName="bg-red-700 text-white px-2 py-1 rounded-md inline-flex justify-center overflow-hidden"
-                splitLevelClassName="overflow-hidden"
-                splitBy="characters"
-                staggerDuration={0.025}
-                rotationInterval={3000}
-              />
-            </motion.p>
+            <div className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mx-auto">
+              {t('join_thousands')}{" "}
+              <RotatingText text={rotatingTexts} className="text-red-700" />
+            </div>
           </div>
         </div>
       </div>
