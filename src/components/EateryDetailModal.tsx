@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, Phone } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Card } from '@/components/ui/card';
 import { Eatery } from '@/data/eateries';
@@ -9,7 +9,7 @@ interface EateryDetailModalProps {
   onClose: () => void;
 }
 
-const CARD_RADIUS = 280;
+const CARD_RADIUS = 320;
 
 export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) => {
   const { t } = useTranslation();
@@ -27,21 +27,21 @@ export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) =
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
       onClick={onClose}
     >
       <button
         onClick={onClose}
-        className="absolute top-8 right-8 z-50 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
+        className="absolute top-6 right-6 z-50 rounded-full bg-white/10 p-3 text-white transition-all hover:bg-white/20 hover:scale-110"
         aria-label="Close"
       >
-        <X className="h-6 w-6" />
+        <X className="h-7 w-7" />
       </button>
 
-      <div className="relative flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+      <div className="relative flex items-center justify-center min-h-[600px]" onClick={(e) => e.stopPropagation()}>
         <motion.div
           layoutId={`logo-${eatery.id}`}
-          className="relative z-10 flex h-48 w-48 items-center justify-center rounded-2xl bg-white p-6 shadow-2xl"
+          className="relative z-20 flex h-56 w-56 items-center justify-center rounded-3xl bg-white p-8 shadow-2xl ring-4 ring-white/20"
         >
           <img
             src={eatery.logoUrl}
@@ -57,8 +57,8 @@ export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) =
             hidden: {},
             visible: {
               transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.2
+                staggerChildren: 0.12,
+                delayChildren: 0.3
               }
             }
           }}
@@ -77,31 +77,33 @@ export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) =
                 variants={{
                   hidden: {
                     opacity: 0,
-                    scale: 0.5,
+                    scale: 0.3,
                     x: 0,
                     y: 0
                   },
                   visible: {
                     opacity: 1,
                     scale: 1,
-                    x: x - 120,
-                    y: y - 140
+                    x: x - 140,
+                    y: y - 160
                   }
                 }}
                 transition={{
                   type: 'spring',
-                  stiffness: 100,
-                  damping: 15
+                  stiffness: 120,
+                  damping: 18
                 }}
               >
-                <Card className="h-[280px] w-[240px] overflow-hidden shadow-xl">
+                <Card className="h-[320px] w-[280px] overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow">
                   <img
                     src={detail.imageUrl}
                     alt={t(detail.descriptionKey)}
-                    className="h-[180px] w-full object-cover"
+                    className="h-[200px] w-full object-cover"
                   />
-                  <div className="p-4">
-                    <p className="text-sm text-gray-700">{t(detail.descriptionKey)}</p>
+                  <div className="p-5 bg-white">
+                    <p className="text-sm leading-relaxed text-gray-700 font-medium">
+                      {t(detail.descriptionKey)}
+                    </p>
                   </div>
                 </Card>
               </motion.div>
@@ -110,17 +112,17 @@ export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) =
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="absolute -bottom-32 left-1/2 -translate-x-1/2 text-center"
+          initial={{ opacity: 0, y: 30, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ delay: 0.6, type: 'spring', stiffness: 120 }}
+          className="absolute -bottom-20 left-1/2 -translate-x-1/2"
         >
           <a
             href={`tel:${eatery.phone}`}
-            className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-lg font-semibold text-gray-900 shadow-lg transition-transform hover:scale-105"
+            className="inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-lime-600 to-lime-700 px-8 py-4 text-base font-bold text-white shadow-2xl transition-all hover:scale-105 hover:shadow-lime-500/50 min-w-[280px] justify-center"
           >
-            <span>{t('phone')}:</span>
-            <span className="text-lime-700">{eatery.phone}</span>
+            <Phone className="h-5 w-5" />
+            <span className="whitespace-nowrap">{eatery.phone}</span>
           </a>
         </motion.div>
       </div>

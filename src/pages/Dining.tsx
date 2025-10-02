@@ -12,17 +12,18 @@ const Dining = () => {
   const [selectedEatery, setSelectedEatery] = useState<Eatery | null>(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-lime-50/30">
       <Header />
 
-      <main className="mx-auto max-w-7xl px-4 pt-32 pb-16 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl lg:text-6xl">
+      <main className="mx-auto max-w-7xl px-6 pt-36 pb-20 sm:px-8 lg:px-12">
+        <div className="mb-16 text-center">
+          <h1 className="mb-6 text-5xl font-bold tracking-tight text-gray-900 md:text-6xl lg:text-7xl">
             {t('dining_title')}
           </h1>
-          <p className="text-lg text-gray-600 md:text-xl">
+          <p className="mx-auto max-w-2xl text-xl text-gray-600 md:text-2xl font-light">
             {t('dining_subtitle')}
           </p>
+          <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-gradient-to-r from-lime-500 to-lime-600"></div>
         </div>
 
         <EateryLogoGrid
