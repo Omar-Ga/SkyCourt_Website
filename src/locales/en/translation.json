@@ -1,5 +1,31 @@
 {
   "home": "Home",
+  "dining": "Dining",
+  "dining_title": "Dining & Eateries",
+  "dining_subtitle": "Discover a world of flavors at SkyCourt",
+  "phone": "Phone",
+  "eateries": {
+    "kfc": {
+      "detail1": "Crispy fried chicken that's world-famous",
+      "detail2": "Family buckets and combo meals",
+      "detail3": "Fresh, hot, and finger-lickin' good"
+    },
+    "pizza_hut": {
+      "detail1": "Classic pan pizzas made with premium ingredients",
+      "detail2": "Wide variety of toppings and flavors",
+      "detail3": "Perfect for family dining and gatherings"
+    },
+    "hardees": {
+      "detail1": "Charbroiled burgers with signature taste",
+      "detail2": "Premium quality beef and fresh ingredients",
+      "detail3": "Breakfast served all day"
+    },
+    "feterty": {
+      "detail1": "Traditional Egyptian pastries and feteer",
+      "detail2": "Sweet and savory options for every taste",
+      "detail3": "Made fresh daily with authentic recipes"
+    }
+  },
   "why_choose_skycourt": "Why Choose SkyCourt?",
   "experience_shopping": "Experience shopping like never before with our world-class amenities and services",
   "features": [

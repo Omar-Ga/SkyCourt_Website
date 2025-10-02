@@ -56,6 +56,19 @@ const Header = () => {
                 {t('home')}
               </Button>
             </Link>
+            <Link to="/dining">
+              <Button
+                variant="ghost"
+                className={cn(
+                  'font-bold transition-colors duration-300 rounded-full',
+                  isScrolled
+                    ? 'text-red-700 hover:bg-red-700/10 hover:text-red-700'
+                    : 'text-white hover:bg-white/10 hover:text-white'
+                )}
+              >
+                {t('dining')}
+              </Button>
+            </Link>
             <LanguageSwitcher isScrolled={isScrolled} />
           </nav>
           {/* Mobile menu */}
@@ -82,6 +95,13 @@ const Header = () => {
                       <Link to="/">
                         <Button variant="ghost" className="w-full justify-start text-base">
                           {t('home')}
+                        </Button>
+                      </Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Link to="/dining">
+                        <Button variant="ghost" className="w-full justify-start text-base">
+                          {t('dining')}
                         </Button>
                       </Link>
                     </SheetClose>
