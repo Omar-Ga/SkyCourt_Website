@@ -1,9 +1,9 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { useRef, useLayoutEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { X, Phone } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Card } from '@/components/ui/card';
 import { Eatery } from '@/data/eateries';
-import { useRef, useLayoutEffect, useState } from 'react';
 
 interface EateryDetailModalProps {
   eatery: Eatery;
@@ -62,7 +62,6 @@ export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) =
         <motion.div
           layoutId={`logo-${eatery.id}`}
           className="relative z-20 flex flex-col overflow-hidden justify-start items-center rounded-3xl bg-white shadow-2xl ring-4 ring-white/20"
-          onAnimationComplete={handleLayoutDone}
           onLayoutAnimationComplete={handleLayoutDone}
         >
           <div className="w-48 h-48 flex items-center justify-center p-6">
@@ -72,28 +71,26 @@ export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) =
               className="h-full w-full object-contain"
             />
           </div>
-          <AnimatePresence>
-            {isDetailsVisible && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: measuredHeight ?? 0, opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ type: 'spring', stiffness: 120, damping: 18 }}
-                className="w-full overflow-hidden"
-              >
-                <div ref={contentRef} className="w-full flex flex-col items-center px-6 pb-6">
-                  <h2 className="text-2xl leading-tight font-bold text-gray-900 mb-2 text-center">{eatery.name}</h2>
-                  <a
-                    href={`tel:${eatery.phone}`}
-                    className="inline-flex items-center justify-center gap-2 h-10 rounded-lg bg-lime-100 px-4 text-base leading-none font-medium text-lime-800 transition-colors hover:bg-lime-200"
-                  >
-                    <Phone className="h-4 w-4" />
-                    <span>{eatery.phone}</span>
-                  </a>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {isDetailsVisible && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: measuredHeight ?? 0, opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+              className="w-full overflow-hidden"
+            >
+              <div ref={contentRef} className="w-full flex flex-col items-center px-6 pb-6">
+                <h2 className="text-2xl leading-tight font-bold text-gray-900 mb-2 text-center">{eatery.name}</h2>
+                <a
+                  href={`tel:${eatery.phone}`}
+                  className="inline-flex items-center justify-center gap-2 h-10 rounded-lg bg-lime-100 px-4 text-base leading-none font-medium text-lime-800 transition-colors hover:bg-lime-200"
+                >
+                  <Phone className="h-4 w-4" />
+                  <span>{eatery.phone}</span>
+                </a>
+              </div>
+            </motion.div>
+          )}
         </motion.div>
 
         <motion.div
