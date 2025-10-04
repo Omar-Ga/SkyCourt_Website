@@ -13,7 +13,7 @@ const Dining = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-lime-50/30">
-      <Header />
+      <Header startScrolled />
 
       <main className="mx-auto max-w-7xl px-6 pt-36 pb-20 sm:px-8 lg:px-12">
         <div className="mb-16 text-center">

@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    hmr: { host: 'epinions-pamela-spelling-stick.trycloudflare.com' }
+    hmr: { host: 'graphic-disk-anne-exhibition.trycloudflare.com' }
   },
   build: {
     rollupOptions: {

@@ -7,11 +7,17 @@ import LanguageSwitcher, { LanguageSwitcherProps } from './LanguageSwitcher';
 import { Menu } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 
-const Header = () => {
+interface HeaderProps {
+  startScrolled?: boolean;
+}
+
+const Header = ({ startScrolled = false }: HeaderProps) => {
   const { t, i18n } = useTranslation();
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(startScrolled);
 
   useEffect(() => {
+    if (startScrolled) return;
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > window.innerHeight);
     };
@@ -20,7 +26,7 @@ const Header = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [startScrolled]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 h-24">
