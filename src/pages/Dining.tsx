@@ -34,7 +34,7 @@ const Dining = () => {
 
       <Footer />
 
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {selectedEatery && (
           <EateryDetailModal
             eatery={selectedEatery}

@@ -1,8 +1,9 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { X, Phone } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Card } from '@/components/ui/card';
 import { Eatery } from '@/data/eateries';
+import { useRef, useLayoutEffect, useState } from 'react';
 
 interface EateryDetailModalProps {
   eatery: Eatery;
@@ -13,6 +14,9 @@ const CARD_RADIUS = 320;
 
 export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) => {
   const { t } = useTranslation();
+  const [isDetailsVisible, setIsDetailsVisible] = useState(false);
+  const [measuredHeight, setMeasuredHeight] = useState<number | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
 
   const calculatePosition = (index: number, total: number) => {
     const angle = (index / total) * 2 * Math.PI - Math.PI / 2;
@@ -21,6 +25,22 @@ export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) =
       y: Math.sin(angle) * CARD_RADIUS
     };
   };
+
+  // Reveal the details section only after the shared layout animation settles
+  const handleLayoutDone = () => {
+    setIsDetailsVisible(true);
+  };
+
+  // Measure the details content height once visible, then lock to that height
+  useLayoutEffect(() => {
+    if (isDetailsVisible && contentRef.current) {
+      const { height } = contentRef.current.getBoundingClientRect();
+      // Ceil to avoid subpixel rounding causing tiny snaps
+      setMeasuredHeight(Math.ceil(height));
+    } else {
+      setMeasuredHeight(null);
+    }
+  }, [isDetailsVisible, eatery.id]);
 
   return (
     <motion.div
@@ -41,13 +61,39 @@ export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) =
       <div className="relative flex items-center justify-center min-h-[600px]" onClick={(e) => e.stopPropagation()}>
         <motion.div
           layoutId={`logo-${eatery.id}`}
-          className="relative z-20 flex h-56 w-56 items-center justify-center rounded-3xl bg-white p-8 shadow-2xl ring-4 ring-white/20"
+          className="relative z-20 flex flex-col overflow-hidden justify-start items-center rounded-3xl bg-white shadow-2xl ring-4 ring-white/20"
+          onAnimationComplete={handleLayoutDone}
+          onLayoutAnimationComplete={handleLayoutDone}
         >
-          <img
-            src={eatery.logoUrl}
-            alt={eatery.name}
-            className="h-full w-full object-contain"
-          />
+          <div className="w-48 h-48 flex items-center justify-center p-6">
+            <img
+              src={eatery.logoUrl}
+              alt={eatery.name}
+              className="h-full w-full object-contain"
+            />
+          </div>
+          <AnimatePresence>
+            {isDetailsVisible && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: measuredHeight ?? 0, opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+                className="w-full overflow-hidden"
+              >
+                <div ref={contentRef} className="w-full flex flex-col items-center px-6 pb-6">
+                  <h2 className="text-2xl leading-tight font-bold text-gray-900 mb-2 text-center">{eatery.name}</h2>
+                  <a
+                    href={`tel:${eatery.phone}`}
+                    className="inline-flex items-center justify-center gap-2 h-10 rounded-lg bg-lime-100 px-4 text-base leading-none font-medium text-lime-800 transition-colors hover:bg-lime-200"
+                  >
+                    <Phone className="h-4 w-4" />
+                    <span>{eatery.phone}</span>
+                  </a>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
 
         <motion.div
@@ -111,20 +157,7 @@ export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) =
           })}
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ delay: 0.6, type: 'spring', stiffness: 120 }}
-          className="absolute -bottom-20 left-1/2 -translate-x-1/2"
-        >
-          <a
-            href={`tel:${eatery.phone}`}
-            className="inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-lime-600 to-lime-700 px-8 py-4 text-base font-bold text-white shadow-2xl transition-all hover:scale-105 hover:shadow-lime-500/50 min-w-[280px] justify-center"
-          >
-            <Phone className="h-5 w-5" />
-            <span className="whitespace-nowrap">{eatery.phone}</span>
-          </a>
-        </motion.div>
+
       </div>
     </motion.div>
   );
