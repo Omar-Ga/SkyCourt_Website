@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Eatery } from '@/data/eateries';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface EateryLogoGridProps {
   eateries: Eatery[];
@@ -8,13 +9,15 @@ interface EateryLogoGridProps {
 }
 
 export const EateryLogoGrid = ({ eateries, onEateryClick }: EateryLogoGridProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5">
       {eateries.map((eatery) => (
         <motion.div
           key={eatery.id}
           layoutId={`logo-${eatery.id}`}
-          whileHover={{ scale: 1.08, y: -5 }}
+          whileHover={!isMobile ? { scale: 1.08, y: -5 } : {}}
           whileTap={{ scale: 0.95 }}
           onClick={() => onEateryClick(eatery)}
           className="cursor-pointer"

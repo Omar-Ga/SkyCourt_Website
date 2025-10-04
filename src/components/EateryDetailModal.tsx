@@ -1,9 +1,10 @@
 import { useRef, useLayoutEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { X, Phone } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Card } from '@/components/ui/card';
 import { Eatery } from '@/data/eateries';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface EateryDetailModalProps {
   eatery: Eatery;
@@ -12,8 +13,32 @@ interface EateryDetailModalProps {
 
 const CARD_RADIUS = 320;
 
+const listVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.3
+    }
+  }
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 150,
+      damping: 20,
+    } as const,
+  },
+};
+
 export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) => {
   const { t } = useTranslation();
+  const isMobile = useIsMobile();
   const [isDetailsVisible, setIsDetailsVisible] = useState(false);
   const [measuredHeight, setMeasuredHeight] = useState<number | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -26,21 +51,18 @@ export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) =
     };
   };
 
-  // Reveal the details section only after the shared layout animation settles
   const handleLayoutDone = () => {
     setIsDetailsVisible(true);
   };
 
-  // Measure the details content height once visible, then lock to that height
   useLayoutEffect(() => {
     if (isDetailsVisible && contentRef.current) {
       const { height } = contentRef.current.getBoundingClientRect();
-      // Ceil to avoid subpixel rounding causing tiny snaps
       setMeasuredHeight(Math.ceil(height));
     } else {
       setMeasuredHeight(null);
     }
-  }, [isDetailsVisible, eatery.id]);
+  }, [isDetailsVisible, eatery.id, isMobile]); // Rerun on isMobile change
 
   return (
     <motion.div
@@ -58,23 +80,24 @@ export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) =
         <X className="h-7 w-7" />
       </button>
 
-      <div className="relative flex items-center justify-center min-h-[600px]" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="relative flex items-center justify-center"
+        style={{ minHeight: isMobile ? 'auto' : '600px' }}
+        onClick={(e) => e.stopPropagation()}
+      >
         <motion.div
           layoutId={`logo-${eatery.id}`}
           className="relative z-20 flex flex-col overflow-hidden justify-start items-center rounded-3xl bg-white shadow-2xl ring-4 ring-white/20"
           onLayoutAnimationComplete={handleLayoutDone}
+          style={{ width: isMobile ? 'calc(100vw - 32px)' : 'auto' }}
         >
           <div className="w-48 h-48 flex items-center justify-center p-6">
-            <img
-              src={eatery.logoUrl}
-              alt={eatery.name}
-              className="h-full w-full object-contain"
-            />
+            <img src={eatery.logoUrl} alt={eatery.name} className="h-full w-full object-contain" />
           </div>
           {isDetailsVisible && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
-              animate={{ height: measuredHeight ?? 0, opacity: 1 }}
+              animate={{ height: measuredHeight ?? 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 120, damping: 18 }}
               className="w-full overflow-hidden"
@@ -88,73 +111,82 @@ export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) =
                   <Phone className="h-4 w-4" />
                   <span>{eatery.phone}</span>
                 </a>
+
+                {isMobile && (
+                  <motion.div
+                    variants={listVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="mt-6 w-full space-y-4 max-h-[calc(100vh-400px)] overflow-y-auto pr-2"
+                  >
+                    {eatery.details.map((detail, index) => (
+                      <motion.div key={index} variants={itemVariants}>
+                        <Card className="overflow-hidden shadow-lg">
+                          <img
+                            src={detail.imageUrl}
+                            alt={t(detail.descriptionKey)}
+                            className="h-[180px] w-full object-cover"
+                          />
+                          <div className="p-4 bg-white">
+                            <p className="text-sm leading-relaxed text-gray-700 font-medium">
+                              {t(detail.descriptionKey)}
+                            </p>
+                          </div>
+                        </Card>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
               </div>
             </motion.div>
           )}
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: {},
-            visible: {
-              transition: {
-                staggerChildren: 0.12,
-                delayChildren: 0.3
+        {!isMobile && isDetailsVisible && (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.12,
+                  delayChildren: 0.3
+                }
               }
-            }
-          }}
-        >
-          {eatery.details.map((detail, index) => {
-            const { x, y } = calculatePosition(index, eatery.details.length);
+            }}
+          >
+            {eatery.details.map((detail, index) => {
+              const { x, y } = calculatePosition(index, eatery.details.length);
 
-            return (
-              <motion.div
-                key={index}
-                className="absolute"
-                style={{
-                  left: '50%',
-                  top: '50%'
-                }}
-                variants={{
-                  hidden: {
-                    opacity: 0,
-                    scale: 0.3,
-                    x: 0,
-                    y: 0
-                  },
-                  visible: {
-                    opacity: 1,
-                    scale: 1,
-                    x: x - 140,
-                    y: y - 160
-                  }
-                }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 120,
-                  damping: 18
-                }}
-              >
-                <Card className="h-[320px] w-[280px] overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow">
-                  <img
-                    src={detail.imageUrl}
-                    alt={t(detail.descriptionKey)}
-                    className="h-[200px] w-full object-cover"
-                  />
-                  <div className="p-5 bg-white">
-                    <p className="text-sm leading-relaxed text-gray-700 font-medium">
-                      {t(detail.descriptionKey)}
-                    </p>
-                  </div>
-                </Card>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-
-
+              return (
+                <motion.div
+                  key={index}
+                  className="absolute"
+                  style={{ left: '50%', top: '50%' }}
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.3, x: 0, y: 0 },
+                    visible: { opacity: 1, scale: 1, x: x - 140, y: y - 160 }
+                  }}
+                  transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+                >
+                  <Card className="h-[320px] w-[280px] overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow">
+                    <img
+                      src={detail.imageUrl}
+                      alt={t(detail.descriptionKey)}
+                      className="h-[200px] w-full object-cover"
+                    />
+                    <div className="p-5 bg-white">
+                      <p className="text-sm leading-relaxed text-gray-700 font-medium">
+                        {t(detail.descriptionKey)}
+                      </p>
+                    </div>
+                  </Card>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        )}
       </div>
     </motion.div>
   );
