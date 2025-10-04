@@ -74,10 +74,10 @@ export const EateryDetailModal = ({ eatery, onClose }: EateryDetailModalProps) =
     >
       <button
         onClick={onClose}
-        className="absolute top-6 right-6 z-50 rounded-full bg-white/10 p-3 text-white transition-all hover:bg-white/20 hover:scale-110"
+        className="absolute top-8 right-6 z-50 rounded-full bg-white/10 p-3 text-white transition-all hover:bg-white/20 hover:scale-110"
         aria-label="Close"
       >
-        <X className="h-7 w-7" />
+        <X className="h-7 w-7 text-black" />
       </button>
 
       <div

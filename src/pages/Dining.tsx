@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import Header from '@/components/Header';
@@ -10,6 +10,17 @@ import { eateries, Eatery } from '@/data/eateries';
 const Dining = () => {
   const { t } = useTranslation();
   const [selectedEatery, setSelectedEatery] = useState<Eatery | null>(null);
+
+  useEffect(() => {
+    if (selectedEatery) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedEatery]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-lime-50/30">

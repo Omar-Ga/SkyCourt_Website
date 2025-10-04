@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    hmr: { host: 'graphic-disk-anne-exhibition.trycloudflare.com' }
+    hmr: { host: 'powerpoint-proof-architectural-prepared.trycloudflare.com' }
   },
   build: {
     rollupOptions: {
